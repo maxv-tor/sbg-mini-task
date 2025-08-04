@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Generation Input Form</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; margin: 0; }
+        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; }
+        button:hover { background: #0056b3; }
+        .error { color: red; display: none; }
+        @media (max-width: 480px) { .form-container { padding: 10px; } input, select, button { font-size: 16px; } }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Lead Generation Parameters</h2>
+        <form id="leadForm" action="https://contentlabs.app.n8n.cloud/webhook/sbg-minitask-lead-form" method="GET">
+            <label for="geography">Geography:</label>
+            <select id="geography" name="geography" required="">
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="UK">UK</option>
+            </select>
+
+            <label for="industries">Industries (comma-separated, e.g., beauty,health,wellness):</label>
+            <input type="text" id="industries" name="industries" value="beauty,health,wellness,fashion,supplements" required="">
+
+            <label for="shopify">Shopify Based:</label>
+            <select id="shopify" name="shopify" required="">
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+            </select>
+
+            <label for="numLeads">How Many Leads I Want Today:</label>
+            <input type="number" id="numLeads" name="numLeads" min="1" value="20" required="">
+            <span class="error" id="numError">Number must be greater than 0.</span>
+
+            <button type="submit">Generate Leads</button>
+        </form>
+    </div>
+    <script>
+        const form = document.getElementById('leadForm');
+        const numLeads = document.getElementById('numLeads');
+        const numError = document.getElementById('numError');
+
+        form.addEventListener('submit', (e) => {
+            if (numLeads.value < 1) {
+                numError.style.display = 'block';
+                e.preventDefault();
+            } else {
+                numError.style.display = 'none';
+            }
+        });
+    </script>
+
+
+</body></html>
