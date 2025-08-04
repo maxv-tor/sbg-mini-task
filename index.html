@@ -3,97 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Generation Input Form</title>
+    <title>Apollo Premium Lead Generation</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 20px; margin: 0; }
-        .form-container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        label { display: block; margin-bottom: 8px; font-weight: bold; }
-        input, select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; }
+        .form-container { max-width: 700px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        .section { margin-bottom: 25px; padding: 15px; background: #f8f9fa; border-radius: 6px; }
+        .section h3 { margin-top: 0; color: #333; font-size: 16px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        input, select, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+        .checkbox-item { display: flex; align-items: center; }
+        .checkbox-item input[type="checkbox"] { width: auto; margin-right: 8px; margin-bottom: 0; }
+        .tech-filters { background: #e3f2fd; border-left: 4px solid #2196f3; }
+        .priority-section { background: #fff3e0; border-left: 4px solid #ff9800; }
+        button { background: #007bff; color: white; padding: 12px 24px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
         button:hover { background: #0056b3; }
-        .error { color: red; display: none; }
-        #feedback { margin-top: 10px; font-weight: bold; }
+        .error { color: red; display: none; font-size: 14px; }
+        #feedback { margin-top: 15px; font-weight: bold; }
         #loading { display: none; text-align: center; }
-        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #007bff; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; margin: 10px auto; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #007bff; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 15px auto; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @media (max-width: 480px) { .form-container { padding: 10px; } input, select, button { font-size: 16px; } }
+        .help-text { font-size: 12px; color: #666; margin-top: -10px; margin-bottom: 15px; }
+        @media (max-width: 480px) { 
+            .form-container { padding: 15px; } 
+            .checkbox-group { flex-direction: column; gap: 10px; }
+            input, select, button { font-size: 16px; } 
+        }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h2>Lead Generation Parameters</h2>
+        <h2>🎯 Apollo Premium Lead Generation</h2>
+        <p style="color: #666; margin-bottom: 25px;">Generate high-quality leads with Apollo.io enrichment and targeting</p>
+        
         <form id="leadForm">
-            <label for="geography">Geography:</label>
-            <select id="geography" name="geography" required>
-                <option value="USA">USA</option>
-                <option value="Canada">Canada</option>
-                <option value="UK">UK</option>
-            </select>
+            <!-- География и Индустрии -->
+            <div class="section">
+                <h3>🌍 Target Market</h3>
+                
+                <label for="geography">Geography:</label>
+                <select id="geography" name="geography" required>
+                    <option value="United States">United States</option>
+                    <option value="Canada">Canada</option>
+                    <option value="United Kingdom">United Kingdom</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="Netherlands">Netherlands</option>
+                </select>
 
-            <label for="industries">Industries (comma-separated, e.g., beauty,health,wellness):</label>
-            <input type="text" id="industries" name="industries" value="beauty,health,wellness,fashion,supplements" required>
+                <label for="industries">Target Industries (comma-separated):</label>
+                <input type="text" id="industries" name="industries" 
+                       value="beauty,health,wellness,fashion,supplements,cosmetics,skincare,fitness" 
+                       placeholder="beauty,health,wellness,fashion,supplements" required>
+                <div class="help-text">Examples: beauty, health, wellness, fashion, supplements, cosmetics, skincare, fitness, nutrition</div>
 
-            <label for="shopify">Shopify Based:</label>
-            <select id="shopify" name="shopify" required>
-                <option value="Y">Y</option>
-                <option value="N">N</option>
-            </select>
+                <label for="keywords">Additional Keywords (optional):</label>
+                <input type="text" id="keywords" name="keywords" 
+                       placeholder="ecommerce, online retail, direct-to-consumer">
+                <div class="help-text">Extra search terms to refine results</div>
+            </div>
 
-            <label for="numLeads">How Many Leads I Want Today:</label>
-            <input type="number" id="numLeads" name="numLeads" min="1" value="5" required>
-            <span class="error" id="numError">Number must be greater than 0.</span>
+            <!-- Технологические Фильтры -->
+            <div class="section tech-filters">
+                <h3>🛠️ Technology Filters (IMPORTANT)</h3>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="shopify" name="shopify" checked>
+                        <label for="shopify">Shopify Users</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="rokt" name="rokt" checked>
+                        <label for="rokt">🎯 Rokt Users (HIGH PRIORITY)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="aftersell" name="aftersell">
+                        <label for="aftersell">AfterSell Users</label>
+                    </div>
+                </div>
+                <div class="help-text">Rokt users are highest priority - they're already familiar with post-purchase optimization!</div>
+            </div>
 
-            <button type="submit">Generate Leads</button>
+            <!-- Job Titles и Seniority -->
+            <div class="section">
+                <h3>👥 Target Roles</h3>
+                
+                <label>Seniority Levels:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeCLevel" name="includeCLevel">
+                        <label for="includeCLevel">C-Level (CEO, CMO, etc.)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeVP" name="includeVP" checked>
+                        <label for="includeVP">VP Level</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeDirector" name="includeDirector" checked>
+                        <label for="includeDirector">Director Level</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeManager" name="includeManager">
+                        <label for="includeManager">Manager Level</label>
+                    </div>
+                </div>
+
+                <label>Department Focus:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeMarketing" name="includeMarketing" checked>
+                        <label for="includeMarketing">Marketing</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeGrowth" name="includeGrowth" checked>
+                        <label for="includeGrowth">Growth</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="includeEcommerce" name="includeEcommerce" checked>
+                        <label for="includeEcommerce">Ecommerce</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enrichment Options -->
+            <div class="section priority-section">
+                <h3>💎 Premium Enrichment</h3>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enrichPersonalEmails" name="enrichPersonalEmails" checked>
+                        <label for="enrichPersonalEmails">Find Personal Emails</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enrichPhoneNumbers" name="enrichPhoneNumbers">
+                        <label for="enrichPhoneNumbers">Find Phone Numbers</label>
+                    </div>
+                </div>
+                <div class="help-text">Personal emails = higher response rates. Phone numbers = cold calling opportunities.</div>
+            </div>
+
+            <!-- Lead Quantity -->
+            <div class="section">
+                <h3>📊 Campaign Size</h3>
+                
+                <label for="numLeads">Number of Leads to Generate:</label>
+                <select id="numLeads" name="numLeads" required>
+                    <option value="10">10 leads (Quick test)</option>
+                    <option value="20" selected>20 leads (Recommended)</option>
+                    <option value="50">50 leads (Large campaign)</option>
+                    <option value="100">100 leads (Enterprise)</option>
+                </select>
+                <div class="help-text">More leads = more Apollo credits used. Each lead costs ~1-2 credits.</div>
+            </div>
+
+            <button type="submit">🚀 Generate Premium Leads with Apollo</button>
+            <span class="error" id="generalError"></span>
         </form>
-        <div id="loading"><div class="spinner"></div> Processing...</div>
+        
+        <div id="loading">
+            <div class="spinner"></div>
+            <p>Processing your Apollo search...<br>
+            <small>Finding qualified leads with enrichment data</small></p>
+        </div>
         <div id="feedback"></div>
     </div>
+
     <script>
         const form = document.getElementById('leadForm');
-        const numLeads = document.getElementById('numLeads');
-        const numError = document.getElementById('numError');
         const loading = document.getElementById('loading');
         const feedback = document.getElementById('feedback');
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            if (numLeads.value < 1) {
-                numError.style.display = 'block';
-                return;
-            }
-            numError.style.display = 'none';
 
-            // Collect parameters
-            const params = {
-                geography: document.getElementById('geography').value,
-                industries: document.getElementById('industries').value,
-                shopify: document.getElementById('shopify').value,
-                numLeads: numLeads.value
-            };
-            console.log('Submitting parameters:', params);
+            // Collect all form data
+            const formData = new FormData(form);
+            const params = {};
+
+            // Basic fields
+            params.geography = formData.get('geography');
+            params.industries = formData.get('industries');
+            params.keywords = formData.get('keywords') || '';
+            params.numLeads = formData.get('numLeads');
+
+            // Technology filters
+            params.shopify = document.getElementById('shopify').checked ? 'Y' : 'N';
+            params.rokt = document.getElementById('rokt').checked ? 'Y' : 'N';
+            params.aftersell = document.getElementById('aftersell').checked ? 'Y' : 'N';
+
+            // Seniority levels
+            params.includeCLevel = document.getElementById('includeCLevel').checked ? 'Y' : 'N';
+            params.includeVP = document.getElementById('includeVP').checked ? 'Y' : 'N';
+            params.includeDirector = document.getElementById('includeDirector').checked ? 'Y' : 'N';
+            params.includeManager = document.getElementById('includeManager').checked ? 'Y' : 'N';
+
+            // Department focus
+            params.includeMarketing = document.getElementById('includeMarketing').checked ? 'Y' : 'N';
+            params.includeGrowth = document.getElementById('includeGrowth').checked ? 'Y' : 'N';
+            params.includeEcommerce = document.getElementById('includeEcommerce').checked ? 'Y' : 'N';
+
+            // Enrichment options
+            params.enrichPersonalEmails = document.getElementById('enrichPersonalEmails').checked ? 'Y' : 'N';
+            params.enrichPhoneNumbers = document.getElementById('enrichPhoneNumbers').checked ? 'Y' : 'N';
+
+            console.log('🎯 Submitting Apollo parameters:', params);
 
             // Show loading
             loading.style.display = 'block';
             feedback.textContent = '';
+            form.style.display = 'none';
 
             try {
-                const response = await fetch('https://contentlabs.app.n8n.cloud/webhook-test/sbg-minitask-lead-form', {
+                const response = await fetch('https://contentlabs.app.n8n.cloud/webhook-test/sbg-apollo-premium-leads', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(params)
                 });
+
                 if (response.ok) {
-                    feedback.textContent = 'Success! Leads generated. Check your Google Sheets.';
-                    feedback.style.color = 'green';
+                    feedback.innerHTML = `
+                        <div style="color: green; background: #d4edda; padding: 15px; border-radius: 4px; margin-top: 15px;">
+                            <h4>✅ Success! Apollo lead generation started</h4>
+                            <p>• Processing ${params.numLeads} leads with premium enrichment<br>
+                            • Technology filters: Shopify=${params.shopify}, Rokt=${params.rokt}<br>
+                            • Target: ${params.geography} | ${params.industries}<br>
+                            • You'll receive an email with results shortly</p>
+                            <small>Check your Google Sheets for detailed lead data</small>
+                        </div>
+                    `;
                 } else {
-                    throw new Error('Response not OK');
+                    throw new Error(`HTTP ${response.status}`);
                 }
             } catch (error) {
-                console.error('Error:', error);
-                feedback.textContent = 'Error: Failed to generate leads. Check console or n8n logs.';
-                feedback.style.color = 'red';
+                console.error('❌ Error:', error);
+                feedback.innerHTML = `
+                    <div style="color: red; background: #f8d7da; padding: 15px; border-radius: 4px; margin-top: 15px;">
+                        <h4>❌ Error generating leads</h4>
+                        <p>Something went wrong. Please check:</p>
+                        <ul>
+                            <li>n8n workflow is running</li>
+                            <li>Apollo API key is valid</li>
+                            <li>Webhook URL is correct</li>
+                        </ul>
+                        <small>Error details: ${error.message}</small>
+                    </div>
+                `;
+                form.style.display = 'block';
             } finally {
                 loading.style.display = 'none';
+            }
+        });
+
+        // Add some visual feedback for priority options
+        document.getElementById('rokt').addEventListener('change', function() {
+            const label = this.nextElementSibling;
+            if (this.checked) {
+                label.style.background = '#fff3cd';
+                label.style.padding = '2px 6px';
+                label.style.borderRadius = '3px';
+            } else {
+                label.style.background = 'none';
             }
         });
     </script>
