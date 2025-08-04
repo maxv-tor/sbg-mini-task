@@ -149,21 +149,21 @@
                 
                 <label for="numLeads">Number of Leads to Generate:</label>
                 <select id="numLeads" name="numLeads" required>
+                    <option value="5" selected>5 leads (Quick test)</option>
                     <option value="10">10 leads (Quick test)</option>
-                    <option value="20" selected>20 leads (Recommended)</option>
-                    <option value="50">50 leads (Large campaign)</option>
-                    <option value="100">100 leads (Enterprise)</option>
+                    <option value="20">20 leads (Recommended)</option>
+                    <option value="35">35 leads (Large campaign)</option>
                 </select>
-                <div class="help-text">More leads = more Apollo credits used. Each lead costs ~1-2 credits.</div>
+                <div class="help-text">More leads = more Apollo.io credits used. Each lead costs ~1-2 credits (I've got 1,000+).</div>
             </div>
 
-            <button type="submit">🚀 Generate Premium Leads with Apollo</button>
+            <button type="submit">🚀 Generate Premium Leads for SBG's business growth</button>
             <span class="error" id="generalError"></span>
         </form>
         
         <div id="loading">
             <div class="spinner"></div>
-            <p>Processing your Apollo search...<br>
+            <p>Processing your search...<br>
             <small>Finding qualified leads with enrichment data</small></p>
         </div>
         <div id="feedback"></div>
